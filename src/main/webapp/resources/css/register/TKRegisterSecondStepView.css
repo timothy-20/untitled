@@ -1,0 +1,8 @@
+.register-wrapper {
+    gap: 10px;
+}
+
+.user-information-field {
+    width: 100%;
+    padding: 0 10px 10px 10px;
+}

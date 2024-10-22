@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register with account information</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/resources/css/TKGlobalStyleAsset.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/register/TKRegisterThirdStepView.css">
+    <script src="/resources/js/register/TKRegisterThirdStepView.js" defer>
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>사용자 회원가입(계정 정보)</h1>
+</header>
+<section>
+    <form class="register-form flex-column" action="/register/api/third-step" method="post">
+        <fieldset class="account-information-field flex-column">
+            <legend>아이디 및 비밀번호</legend>
+            <div class="input-wrapper">
+                <label for="id">아이디:<br></label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="password">비밀번호:<br></label>
+                <input type="password" id="password" name="password" required>
+                <div id="password-error-label" class="error-label"></div>
+            </div>
+            <div class="input-wrapper">
+                <label for="password-confirm">비밀번호 재확인:<br></label>
+                <input type="password" id="password-confirm" name="password-confirm" required>
+                <div id="password-confirm-error-label" class="error-label"></div>
+            </div>
+            <div class="input-wrapper">
+                <input type="checkbox" id="show-passwords">
+                <label for="show-passwords"> 비밀번호 표시</label>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="reset">다시쓰기</button>
+            <button type="submit">회원가입</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

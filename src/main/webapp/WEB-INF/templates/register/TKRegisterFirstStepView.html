@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register with name</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/resources/css/TKGlobalStyleAsset.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/register/TKRegisterFirstStepView.css">
+    <script src="/resources/js/register/TKRegisterFirstStepView.js" defer>
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>사용자 회원가입(이름)</h1>
+</header>
+<section>
+    <form class="register-wrapper flex-column" action="/register/api/first-step" method="post">
+        <fieldset class="name-field">
+            <legend>이름</legend>
+            <div class="input-wrapper">
+                <label for="last-name">성:<br></label>
+                <input type="text" id="last-name" name="lastName" placeholder="선택 항목">
+            </div>
+            <div class="input-wrapper">
+                <label for="first-name">이름:<br></label>
+                <input type="text" id="first-name" name="firstName" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="nickname">별명:<br></label>
+                <input type="text" id="nickname" name="nickname" placeholder="선택 항목">
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="reset">다시쓰기</button>
+            <button type="submit">다음</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

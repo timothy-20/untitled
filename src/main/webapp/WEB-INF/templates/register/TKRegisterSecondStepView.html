@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register with personal information</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/resources/css/TKGlobalStyleAsset.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/register/TKRegisterSecondStepView.css">
+    <script src="/resources/js/register/TKRegisterSecondStepView.js" defer>
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>사용자 회원가입(개인정보)</h1>
+</header>
+<section>
+    <form class="register-wrapper flex-column" action="/register/api/second-step" method="post">
+        <fieldset class="user-information-field">
+            <legend>생년월일 및 성별</legend>
+            <div class="input-wrapper">
+                <label for="birthday">생년월일:<br></label>
+                <input type="date" id="birthday" name="birthday" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="gender">성별:<br></label>
+                <select id="gender" name="gender">
+                    <option value="none">공개 안함</option>
+                    <optgroup label="선택">
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                    </optgroup>
+                </select>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="reset">다시쓰기</button>
+            <button type="submit">다음</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>
