@@ -65,15 +65,6 @@ public class TKLog4j2Config extends ConfigurationFactory {
 //        debugLogger.add(builder.newAppenderRef("log"));
 //        builder.add(debugLogger);
 
-        try {
-            builder.writeXmlConfiguration(System.out);
-
-        } catch (IOException ie) {
-            System.out.println(" ");
-            return null;
-        }
-
-        System.out.println(" ");
         return builder.build();
     }
 
