@@ -2,10 +2,8 @@ package com.timothy;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
-import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullApi;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class TKSpringWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -17,6 +15,7 @@ public class TKSpringWebApplicationInitializer extends AbstractAnnotationConfigD
 
     @Override
     public void onStartup(@NonNull ServletContext servletContext) throws ServletException {
+        // log4j2 로거 사용 설정
         TKLog4j2Config log4j2Config = new TKLog4j2Config();
         Configurator.initialize(log4j2Config.getConfiguration(null, null));
 

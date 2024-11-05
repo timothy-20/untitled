@@ -13,7 +13,20 @@ public class TKGlobalExceptionHandler {
 
     @ExceptionHandler(ResponseStatusException.class)
     public String handleResponseStatusException(ResponseStatusException exception, Model model) {
+        logger.info("Current working directory: {}", System.getProperty("user.dir"));
+
+        logger.trace("Test log...");
+        logger.debug("Test log...");
         logger.info("Test log...");
+        logger.warn("Test log...");
+        logger.error("Test log...");
+
+
+
+
+
+
+
         model.addAttribute("errorCode", exception.getStatusCode());
         model.addAttribute("errorMessage", exception.getReason());
         return "TKGlobalErrorView";

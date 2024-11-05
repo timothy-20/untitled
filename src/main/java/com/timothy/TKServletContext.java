@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -62,7 +63,13 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
         registry.addFormatter(this.varietyFormatter());
     }
 
-//    @Override
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        WebMvcConfigurer.super.addInterceptors(registry);
+        registry.addInterceptor(this.loginInterceptor());
+    }
+
+    //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")
 //                .allowedOrigins("*")
@@ -79,6 +86,11 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
     @Bean
     public TKVarietyFormatter varietyFormatter() {
         return new TKVarietyFormatter(this.varietyService);
+    }
+
+    @Bean
+    public TKLoginInterceptor loginInterceptor() {
+        return new TKLoginInterceptor();
     }
 
     @Bean

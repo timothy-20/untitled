@@ -19,7 +19,7 @@ public class TKRegisterViewController {
     @GetMapping
     public RedirectView initialize(HttpSession session) {
         // timeout 5분으로 설정
-        session.setMaxInactiveInterval(300);
+        session.setMaxInactiveInterval(3);
         session.setAttribute("isRegistrationStarted", Boolean.TRUE);
         return new RedirectView("/register/first-step");
     }
