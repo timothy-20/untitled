@@ -89,8 +89,8 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
     }
 
     @Bean
-    public TKLoginInterceptor loginInterceptor() {
-        return new TKLoginInterceptor();
+    public TKAccessInterceptor loginInterceptor() {
+        return new TKAccessInterceptor();
     }
 
     @Bean

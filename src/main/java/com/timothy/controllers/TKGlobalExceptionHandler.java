@@ -9,24 +9,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 @ControllerAdvice
 public class TKGlobalExceptionHandler {
-    private static final Logger logger = LogManager.getLogger(TKGlobalExceptionHandler.class);
+    private static final Logger DEFAULT_LOGGER = LogManager.getRootLogger();
 
     @ExceptionHandler(ResponseStatusException.class)
     public String handleResponseStatusException(ResponseStatusException exception, Model model) {
-        logger.info("Current working directory: {}", System.getProperty("user.dir"));
-
-        logger.trace("Test log...");
-        logger.debug("Test log...");
-        logger.info("Test log...");
-        logger.warn("Test log...");
-        logger.error("Test log...");
-
-
-
-
-
-
-
+        DEFAULT_LOGGER.error(exception);
         model.addAttribute("errorCode", exception.getStatusCode());
         model.addAttribute("errorMessage", exception.getReason());
         return "TKGlobalErrorView";
@@ -34,8 +21,10 @@ public class TKGlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public String handleGenericException(Exception exception, Model model) {
-        model.addAttribute("log", this.getStackTraceAsString(exception));
-        return "";
+        DEFAULT_LOGGER.error(this.getStackTraceAsString(exception));
+        model.addAttribute("errorCode", "예상치 못한 문제 발생");
+        model.addAttribute("errorMessage", "서버 내부에 예상치 못한 문제가 발생했습니다. 자세한 사항은 관리자에게 문의해주세요.");
+        return "TKGlobalErrorView";
     }
 
     private String getStackTraceAsString(Exception exception) {
