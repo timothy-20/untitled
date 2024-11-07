@@ -93,15 +93,14 @@ public class TKDefaultLog4jLogger implements TKLog4jLogger{
     }
 
     protected LayoutComponentBuilder getDefaultPatternLayoutBuilder() {
-        // 로그 레이아웃 페턴에 대한 설정
         LayoutComponentBuilder patternLayoutBuilder = this.builder.newLayout("PatternLayout");
-        patternLayoutBuilder.addAttribute("pattern", "[%date{yyyy-MM-dd HH:mm:ss}] %-5level - %class:%line - %msg%n");
+        patternLayoutBuilder.addAttribute("pattern", "[%date{yyyy-MM-dd HH:mm:ss}] %-5level - %class %method:%line - %msg%n");
         return patternLayoutBuilder;
     }
 
     protected LayoutComponentBuilder getStyledPatternLayoutBuilder() {
         LayoutComponentBuilder patternLayoutBuilder = this.builder.newLayout("PatternLayout");
-        patternLayoutBuilder.addAttribute("pattern", "[%style{%date{yyyy-MM-dd HH:mm:ss}}{lightgray}] %highlight{%-5level}{FATAL=red, ERROR=orange, WARN=yellow, INFO=green, DEBUG=blue} - %class:%line - %msg%n");
+        patternLayoutBuilder.addAttribute("pattern", "[%style{%date{yyyy-MM-dd HH:mm:ss}}{underline}] %highlight{%-5level}{FATAL=red, ERROR=yellow, WARN=green, INFO=blue, DEBUG=black} - %class %method:%line - %msg%n");
         return patternLayoutBuilder;
     }
 }

@@ -18,7 +18,6 @@ public class TKSpringWebApplicationInitializer extends AbstractAnnotationConfigD
         // log4j2 로거 사용 설정
         TKLog4jConfiguration log4jConfig = new TKLog4jConfiguration();
         Configurator.initialize(log4jConfig.getConfiguration(null, null));
-
         super.onStartup(servletContext);
     }
 

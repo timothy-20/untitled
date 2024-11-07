@@ -66,7 +66,8 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(this.loginInterceptor());
+        registry.addInterceptor(this.accessInterceptor()).addPathPatterns("/login/**");
+        registry.addInterceptor(this.accessInterceptor()).addPathPatterns("/register/**");
     }
 
     //    @Override
@@ -89,7 +90,7 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
     }
 
     @Bean
-    public TKAccessInterceptor loginInterceptor() {
+    public TKAccessInterceptor accessInterceptor() {
         return new TKAccessInterceptor();
     }
 

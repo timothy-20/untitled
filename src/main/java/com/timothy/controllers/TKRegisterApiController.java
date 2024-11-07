@@ -61,21 +61,10 @@ public class TKRegisterApiController {
     @PostMapping("/third-step")
     public ResponseEntity<Void> processThirdStep(
             HttpServletRequest request,
+            TKUserService service,
             @RequestParam(value = "id") String id,
             @RequestParam(value = "password") String password
     ) {
-        HttpSession session = request.getSession(false);
-
-        if (session != null) {
-            session.setAttribute("id", id);
-            session.setAttribute("password", password);
-        }
-
-        return new ResponseEntity<>(this.createRedirectHeaders(URI.create("/register/finish")), HttpStatus.SEE_OTHER);
-    }
-
-    @PostMapping("finish")
-    public ResponseEntity<Void> processFinish(HttpServletRequest request, TKUserService service) {
         HttpSession session = request.getSession(false);
 
         if (session == null) {
@@ -86,8 +75,6 @@ public class TKRegisterApiController {
         String nickname = (String)session.getAttribute("nickname");
         LocalDate birthday = (LocalDate)session.getAttribute("birthday");
         String gender = (String)session.getAttribute("gender");
-        String id = (String)session.getAttribute("id");
-        String password = (String)session.getAttribute("password");
 
         if (realName == null || nickname == null || birthday == null || gender == null || id == null || password == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "회원가입에 필요한 사용자 정보가 일부 누락되었습니다.");
@@ -101,7 +88,7 @@ public class TKRegisterApiController {
         userEntity.setId(id);
         userEntity.setPassword(password);
         service.insertUser(userEntity);
-        return new ResponseEntity<>(this.createRedirectHeaders(URI.create("/")), HttpStatus.SEE_OTHER);
+        return new ResponseEntity<>(this.createRedirectHeaders(URI.create("/register/finish")), HttpStatus.SEE_OTHER);
     }
 
     private HttpHeaders createRedirectHeaders(URI targetURI) {

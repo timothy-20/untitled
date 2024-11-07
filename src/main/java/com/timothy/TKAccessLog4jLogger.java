@@ -76,7 +76,7 @@ public class TKAccessLog4jLogger implements TKLog4jLogger {
 
     protected LayoutComponentBuilder getPatternLayoutBuilder() {
         LayoutComponentBuilder patternLayoutBuilder = this.builder.newLayout("PatternLayout");
-        patternLayoutBuilder.addAttribute("pattern", "[%date{yyyy-MM-dd HH:mm:ss}, %nano] %-5level - %msg%n");
+        patternLayoutBuilder.addAttribute("pattern", "[%date{yyyy-MM-dd HH:mm:ss}] %nano - %msg%n");
         return patternLayoutBuilder;
     }
 }
