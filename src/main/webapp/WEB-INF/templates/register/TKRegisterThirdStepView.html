@@ -21,7 +21,11 @@
             <legend>아이디 및 비밀번호</legend>
             <div class="input-wrapper">
                 <label for="id">아이디:<br></label>
-                <input type="text" id="id" name="id" required>
+                <span>
+                    <input type="text" id="id" name="id" required>
+                    <button id="check-id-duplication" type="button">중복확인</button>
+                </span>
+                <div id="id-error-label" class="error-label"></div>
             </div>
             <div class="input-wrapper">
                 <label for="password">비밀번호:<br></label>

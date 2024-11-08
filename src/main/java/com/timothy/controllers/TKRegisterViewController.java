@@ -2,23 +2,24 @@ package com.timothy.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDate;
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/register")
 public class TKRegisterViewController {
-    public TKRegisterViewController() {
-        super();
-    }
-
     @GetMapping
     public RedirectView initialize(HttpSession session) {
         // timeout 5분으로 설정
-        session.setMaxInactiveInterval(3);
+        session.setMaxInactiveInterval(300);
         session.setAttribute("isRegistrationStarted", Boolean.TRUE);
         return new RedirectView("/register/first-step");
     }
@@ -68,7 +69,7 @@ public class TKRegisterViewController {
         }
 
         Boolean isRegistrationStarted = (Boolean)session.getAttribute("isRegistrationStarted");
-        String birthday = (String)session.getAttribute("birthday");
+        LocalDate birthday = (LocalDate)session.getAttribute("birthday");
         String gender = (String)session.getAttribute("gender");
 
         if ((isRegistrationStarted == null || !isRegistrationStarted) || birthday == null || gender == null) {

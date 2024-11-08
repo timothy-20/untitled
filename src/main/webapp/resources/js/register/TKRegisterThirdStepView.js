@@ -42,24 +42,32 @@ function validateConfirmPassword() {
     }
 }
 
-let formElement = document.getElementById("register-form");
-formElement.onsubmit = () => {
-    // 에러 라벨 상태 초기화
-    let errorLabelElement = document.getElementById("password-error-label");
-    errorLabelElement.innerHTML = "";
-    errorLabelElement.style.color = "transparent";
+let formElements =  document.getElementsByTagName("form");
 
-    errorLabelElement = document.getElementById("password-confirm-error-label");
-    errorLabelElement.innerHTML = "";
-    errorLabelElement.style.color = "transparent";
+for (let i = 0; i < formElements.length; i++) {
+    let formElement = formElements[i];
 
-    if (!validatePassword()) {
-        return false;
+    if (formElement.action.includes("/register/api/third-step")) {
+        formElement.onsubmit = () => {
+            // 에러 라벨 상태 초기화
+            let errorLabelElement = document.getElementById("password-error-label");
+            errorLabelElement.innerHTML = "";
+            errorLabelElement.style.color = "transparent";
+
+            errorLabelElement = document.getElementById("password-confirm-error-label");
+            errorLabelElement.innerHTML = "";
+            errorLabelElement.style.color = "transparent";
+
+            if (!validatePassword()) {
+                return false;
+            }
+
+            return validateConfirmPassword();
+        };
     }
+}
 
-    return validateConfirmPassword();
-};
-
+// 패스워드 입력 내용 숨기기 및 보여주기
 let showPasswordsElement = document.getElementById("show-passwords");
 showPasswordsElement.onchange = () => {
     let passwordElement = document.getElementById("password");
@@ -73,3 +81,38 @@ showPasswordsElement.onchange = () => {
         passwordConfirmElement.type = "password";
     }
 };
+
+// 아이디 중복 체크
+let checkIdDuplicationElement = document.getElementById("check-id-duplication");
+checkIdDuplicationElement.onclick = () => {
+    let idElement = document.getElementById("id");
+    let idErrorElement = document.getElementById("id-error-label");
+
+    (async () => {
+        try {
+            const response = await fetch("/register/api/third-step/check-id-duplication", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: idElement.value
+                })
+            });
+            const data = await response.json();
+            idErrorElement.innerText = data.message;
+
+            if (response.ok) {
+                idErrorElement.style.color = "green";
+
+            } else {
+                idErrorElement.style.color = "red";
+            }
+
+        } catch (error) {
+            console.log(error);
+            idErrorElement.innerText = error;
+            idErrorElement.style.color = "red";
+        }
+    })()
+}
