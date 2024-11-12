@@ -51,6 +51,7 @@ public class TKServletContext implements WebMvcConfigurer, ApplicationContextAwa
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/resources/static/img/favicon.ico");
         registry.addResourceHandler("/resources/static/**").addResourceLocations("/resources/static/");
         registry.addResourceHandler("/resources/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/resources/js/**").addResourceLocations("/resources/js/");

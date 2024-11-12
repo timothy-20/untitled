@@ -26,6 +26,7 @@ import java.util.Map;
 public class TKRegisterApiController {
     private static final Logger LOGGER = LogManager.getRootLogger();
     private final TKUserService service;
+    private boolean isIdDuplicate = true;
 
     @PostMapping("/first-step")
     public ResponseEntity<Void> processFirstStep(
@@ -92,6 +93,7 @@ public class TKRegisterApiController {
             return ResponseEntity.badRequest().body(Map.of("message", "이미 사용중인 아이디입니다."));
         }
 
+        this.isIdDuplicate = false;
         return ResponseEntity.ok(Map.of("message", "사용 가능한 아이디입니다."));
     }
 
