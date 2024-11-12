@@ -9,17 +9,17 @@ public class TKRealName {
             throw new IllegalArgumentException("이름은 null 값이거나 빈 문자열일 수 없습니다.");
         }
 
-        this.firstName = firstName;
+        this.firstName = firstName.replace(",", "");
         this.lastName = null;
     }
 
     public void setLastname(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.replace(",", "");
     }
 
     @Override
     public String toString() {
-        String lastName = this.lastName != null && !this.lastName.isEmpty() ? this.lastName + " " : "";
+        String lastName = this.lastName != null && !this.lastName.isEmpty() ? this.lastName + ", " : "";
         return lastName + this.firstName;
     }
 }

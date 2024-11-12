@@ -21,15 +21,15 @@
             <legend>생년월일 및 성별</legend>
             <div class="input-wrapper">
                 <label for="birthday">생년월일:<br></label>
-                <input type="date" id="birthday" name="birthday" required>
+                <input type="date" id="birthday" name="birthday" th:value="${birthday}" required>
             </div>
             <div class="input-wrapper">
                 <label for="gender">성별:<br></label>
                 <select id="gender" name="gender">
-                    <option value="none">공개 안함</option>
+                    <option value="none" th:selected="${gender.equals('none')}">공개 안함</option>
                     <optgroup label="선택">
-                        <option value="male">남성</option>
-                        <option value="female">여성</option>
+                        <option value="male" th:selected="${gender.equals('male')}">남성</option>
+                        <option value="female" th:selected="${gender.equals('female')}">여성</option>
                     </optgroup>
                 </select>
             </div>

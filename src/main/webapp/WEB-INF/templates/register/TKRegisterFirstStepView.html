@@ -21,15 +21,15 @@
             <legend>이름</legend>
             <div class="input-wrapper">
                 <label for="last-name">성:<br></label>
-                <input type="text" id="last-name" name="lastName" placeholder="선택 항목">
+                <input type="text" id="last-name" name="lastName" th:value="${lastName}" placeholder="선택 항목">
             </div>
             <div class="input-wrapper">
                 <label for="first-name">이름:<br></label>
-                <input type="text" id="first-name" name="firstName" required>
+                <input type="text" id="first-name" name="firstName" th:value="${firstName}" required>
             </div>
             <div class="input-wrapper">
                 <label for="nickname">별명:<br></label>
-                <input type="text" id="nickname" name="nickname" placeholder="선택 항목">
+                <input type="text" id="nickname" name="nickname" th:value="${nickname}" placeholder="선택 항목">
             </div>
         </fieldset>
         <div class="button-wrapper">
