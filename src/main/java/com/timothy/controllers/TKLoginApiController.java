@@ -28,7 +28,7 @@ public class TKLoginApiController {
             @RequestParam(value = "password") String password) {
         if (id == null || id.isEmpty()) {
             LOGGER.warn("Unable to get user id.");
-            return ResponseEntity.badRequest().body(Map.of("message", "아이디 입력이 유효하지 않습니다."));
+//            return ResponseEntity.badRequest().body(Map.of("message", "아이디 입력이 유효하지 않습니다."));
         }
 
         TKUserEntity user = this.service.getUserById(id);
@@ -36,23 +36,24 @@ public class TKLoginApiController {
         if (user == null) {
             // 사용자가 존재하지 않는 경우
             LOGGER.warn("Fail to find user with id: {}", id);
-            return ResponseEntity.badRequest().body(Map.of("message", "사용자 계정을 찾을 수 없습니다."));
+//            return ResponseEntity.badRequest().body(Map.of("message", "사용자 계정을 찾을 수 없습니다."));
+            return ResponseEntity.status(HttpStatus.SEE_OTHER)
+                    .header(HttpHeaders.LOCATION, "/login/user-account")
+                    .build();
         }
 
         if (password == null || password.isEmpty()) {
-
+            LOGGER.warn("Unable to get user password.");
+            return ResponseEntity.status(HttpStatus.SEE_OTHER)
+                    .header(HttpHeaders.LOCATION, "/login/user-account")
+                    .build();
         }
 
         if (!user.getPassword().equals(password)) {
             // 사용자의 비밀번호가 일치하지 않는 경우
-            return ResponseEntity.badRequest().body(Map.of("message", "비밀번호가 일치하지 않습니다."));
+//            return ResponseEntity.badRequest().body(Map.of("message", "비밀번호가 일치하지 않습니다."));
         }
 
-        body.put("redirectUrl", baseURL + "/login/complete");
-        return new ResponseEntity<>(body, headers, HttpStatus.OK);
-
-//        return ResponseEntity.status(HttpStatus.SEE_OTHER)
-//                .header(HttpHeaders.LOCATION, "/register/finish")
-//                .build();
+        return ResponseEntity.ok().build();
     }
 }
