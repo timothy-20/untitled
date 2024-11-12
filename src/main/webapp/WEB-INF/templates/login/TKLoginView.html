@@ -16,7 +16,7 @@
     <h1>사용자 로그인</h1>
 </header>
 <section>
-    <div class="login-wrapper">
+    <form class=" flex-column" action="/login/api/user-account" method="post">
         <div class="input-wrapper">
             <label for="id">아이디:<br></label>
             <input type="text" id="id" name="id" required>
@@ -28,10 +28,10 @@
             <div id="password-error-label" class="error-label"></div>
         </div>
         <div class="button-wrapper">
-            <button id="reset-button" type="button">다시쓰기</button>
-            <button id="login-button" type="button">로그인</button>
+            <button type="reset">다시쓰기</button>
+            <button type="submit">로그인</button>
         </div>
-    </div>
+    </form>
 </section>
 </body>
 </html>

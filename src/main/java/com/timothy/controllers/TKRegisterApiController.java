@@ -4,7 +4,6 @@ import com.timothy.entities.TKUserEntity;
 import com.timothy.models.TKRealName;
 import com.timothy.services.TKUserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
