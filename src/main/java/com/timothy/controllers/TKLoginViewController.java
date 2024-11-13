@@ -17,12 +17,26 @@ public class TKLoginViewController {
         session.setAttribute("passwordLoginMessage", "");
         session.setAttribute("passwordLoginIdErrorMessage", "");
         session.setAttribute("passwordLoginPasswordErrorMessage", "");
-        return new RedirectView("/login/user-account");
+        return new RedirectView("/login/password");
     }
 
     @GetMapping("/password")
     public String showPasswordLoginView(HttpSession session, Model model) {
+        if (session != null) {
+            String idErrorMessage = (String)session.getAttribute("passwordLoginIdErrorMessage");
 
+            if (idErrorMessage != null && !idErrorMessage.isEmpty()) {
+                model.addAttribute("idErrorMessage", idErrorMessage);
+                session.setAttribute("passwordLoginIdErrorMessage", "");
+            }
+
+            String passwordErrorMessage = (String)session.getAttribute("passwordLoginPasswordErrorMessage");
+
+            if (passwordErrorMessage != null && !passwordErrorMessage.isEmpty()) {
+                model.addAttribute("passwordErrorMessage", passwordErrorMessage);
+                session.setAttribute("passwordLoginPasswordErrorMessage", "");
+            }
+        }
 
         return "login/TKPasswordLoginView";
     }
